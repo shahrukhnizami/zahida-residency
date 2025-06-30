@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import { doc, getDoc, updateDoc, collection, getDocs, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase';
@@ -19,7 +19,6 @@ import {
   Card,
   Statistic,
   Divider,
-  Badge,
   Tabs,
   Progress,
   Tag,
@@ -29,13 +28,10 @@ import {
 import {
   DashboardOutlined,
   UserOutlined,
-  CreditCardOutlined,
   LogoutOutlined,
   HomeOutlined,
   EditOutlined,
-  PieChartOutlined,
-  BarChartOutlined,
-  AreaChartOutlined,
+ 
   MenuUnfoldOutlined,
   MenuFoldOutlined,
 } from '@ant-design/icons';
@@ -44,7 +40,6 @@ import './UserPanel.css';
 const { Header, Sider, Content } = Layout;
 const { Title, Text } = Typography;
 const { Option } = Select;
-const { TabPane } = Tabs;
 
 const UserPanel = () => {
   const { currentUser, logout } = useContext(AuthContext);
@@ -55,7 +50,6 @@ const UserPanel = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [activeTab, setActiveTab] = useState('dashboard');
   const [form] = Form.useForm();
-  const [editForm, setEditForm] = useState({});
   const [stats, setStats] = useState({
     totalPaidAmount: 0,
     blockA: 0,
